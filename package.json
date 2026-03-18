@@ -1,0 +1,43 @@
+{
+  "name": "ai-bug-detector",
+  "displayName": "AI Bug Detector",
+  "description": "AI-driven bug detection and intelligent code debugger for Python, JavaScript, and Java — powered by Google Gemini.",
+  "version": "0.1.0",
+  "publisher": "piyush-maurya",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Linters",
+    "Education"
+  ],
+  "activationEvents": [
+    "onCommand:aiBugDetector.analyzeCode"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "aiBugDetector.analyzeCode",
+        "title": "AI Bug Detector: Analyze Current File"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "lint": "tsc --noEmit",
+    "package": "vsce package"
+  },
+  "dependencies": {
+    "@babel/parser": "^7.23.0",
+    "@google/generative-ai": "^0.2.0",
+    "dotenv": "^16.0.0"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.85.0",
+    "@types/node": "^18.0.0",
+    "typescript": "^5.3.0"
+  }
+}
