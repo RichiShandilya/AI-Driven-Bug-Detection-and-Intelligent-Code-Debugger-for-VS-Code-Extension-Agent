@@ -1,0 +1,7 @@
+out/
+node_modules/
+.env
+*.vsix
+.DS_Store
+*.js.map
+.vscode/

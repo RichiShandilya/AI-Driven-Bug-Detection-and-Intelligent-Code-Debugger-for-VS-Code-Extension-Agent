@@ -1,3 +1,4 @@
+import { traceable } from "langsmith/traceable";
 
 import { DetectedBug, ExplainedBug, BugType } from '../types';
 import { buildPrompt } from './promptBuilder';
@@ -41,7 +42,8 @@ const FALLBACK_EXPLANATIONS: Record<BugType, { explanation: string; suggestedFix
     },
 };
 
-export async function explainBugs(bugs: DetectedBug[]): Promise<ExplainedBug[]> {
+
+export const explainBugs = traceable(async (bugs: DetectedBug[]): Promise<ExplainedBug[]> => {
     const apiKey = process.env.GEMINI_API_KEY;
 
     if (!apiKey || apiKey === 'your_gemini_api_key_here') {
@@ -60,7 +62,7 @@ export async function explainBugs(bugs: DetectedBug[]): Promise<ExplainedBug[]> 
         logger.error(`Failed to explain bug ${bugs[index].id}`, result.reason);
         return applyFallback(bugs[index]);
     });
-}
+});
 
 async function explainSingleBug(bug: DetectedBug, apiKey: string): Promise<ExplainedBug> {
     const cacheKey = geminiCache.createKey(bug.type, bug.codeSnippet);
